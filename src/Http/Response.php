@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Typesetsh\PdfBundle\Http;
 
+use jsiefer\IO;
 use Symfony\Component\HttpFoundation;
 use typesetsh\Result;
-use jsiefer\IO;
 
 class Response extends HttpFoundation\Response
 {

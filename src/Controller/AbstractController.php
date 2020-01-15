@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Typesetsh\PdfBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle;
 use Symfony\Component\HttpFoundation\HeaderUtils;
-use Typesetsh\PdfBundle\PdfGenerator;
 use Typesetsh\PdfBundle;
+use Typesetsh\PdfBundle\PdfGenerator;
 
 abstract class AbstractController extends FrameworkBundle\Controller\AbstractController
 {
@@ -25,11 +27,10 @@ abstract class AbstractController extends FrameworkBundle\Controller\AbstractCon
         return $response;
     }
 
-
     public static function getSubscribedServices()
     {
         $services = parent::getSubscribedServices();
-        $services['typesetsh.pdf'] = '?' . PdfGenerator::class;
+        $services['typesetsh.pdf'] = '?'.PdfGenerator::class;
 
         return $services;
     }
