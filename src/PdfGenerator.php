@@ -52,8 +52,8 @@ class PdfGenerator
     private function resolveUri(string $uri, ?string $base): string
     {
         $base = $base ?: $this->baseUri;
-        if ($uri[0] === '/') {
-            $uri = $base . $uri;
+        if ($uri && $uri[0] === '/' || $uri[0] === '.') {
+            $uri = $base . '/' . $uri;
         }
 
         if (strpos($uri, 'https://') === 0 || strpos($uri, 'http://')) {
