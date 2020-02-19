@@ -10,7 +10,9 @@ use typesetsh\Result;
 
 class Response extends HttpFoundation\Response
 {
-    /** @var Result */
+    /**
+     * @var Result
+     */
     private $result;
 
     public function __construct(Result $result, int $status = 200, array $headers = [])

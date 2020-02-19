@@ -6,6 +6,7 @@ namespace Typesetsh\PdfBundle;
 
 use typesetsh\HtmlToPdf;
 use typesetsh\Resource;
+use typesetsh\Result;
 
 class PdfGenerator
 {
@@ -36,7 +37,7 @@ class PdfGenerator
         $this->resourceCache = new Resource\Cache($cacheDir);
     }
 
-    public function render(string $html): \typesetsh\Result
+    public function render(string $html): Result
     {
         $result = $this->htmlToPdf->render($html, function ($path, $base = null) {
             return $this->resolveUri($path, $base);
@@ -52,8 +53,8 @@ class PdfGenerator
     private function resolveUri(string $uri, ?string $base): string
     {
         $base = $base ?: $this->baseUri;
-        if ('/' === $uri[0]) {
-            $uri = $base.$uri;
+        if ($uri && '/' === $uri[0] || '.' === $uri[0]) {
+            $uri = $base.'/'.$uri;
         }
 
         if (0 === strpos($uri, 'https://') || strpos($uri, 'http://')) {

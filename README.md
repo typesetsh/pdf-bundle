@@ -3,7 +3,7 @@ TypesetshBundle
 
 This bundle is simple wrapper for the [typeset.sh](https://typeset.sh/) pdf engine.
 
-Typeset.sh is a css/html layout engine that allows to render as PDF. 
+Typeset.sh is a css/html layout engine that allows to render as PDF.
 
 ## Installation
 
@@ -16,13 +16,13 @@ composer require typesetsh/pdf-bundle
 
 ### Enable the Bundle
 
-Then, enable the bundle by adding it to the list of registered bundles 
+Then, enable the bundle by adding it to the list of registered bundles
 in `config/bundles.php` file of your project:
 
 ```php
 return [
     // [...]
-    \Typesetsh\PdfBundle\TypesetshPdfBundle => ['all' => true],
+    Typesetsh\PdfBundle\TypesetshPdfBundle::class => ['all' => true],
 ];
 ```
 
@@ -38,7 +38,6 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Typesetsh\PdfBundle;
 
-
 class TestController extends PdfBundle\Controller\AbstractController
 {
     public function printOrder()
@@ -46,9 +45,9 @@ class TestController extends PdfBundle\Controller\AbstractController
         $order = new \stdClass();
 
         return $this->pdf(
-            'pdf/invoice.html.twig', 
-            ['order' => $order,], 
-            'test.pdf', 
+            'pdf/invoice.html.twig',
+            ['order' => $order],
+            'test.pdf',
             HeaderUtils::DISPOSITION_INLINE
         );
     }
@@ -59,12 +58,16 @@ class TestController extends PdfBundle\Controller\AbstractController
 Alternative you can also use dependency injection to retrieve the pdf generation and do with it as you wish.
 
 ```php
+<?php
+
+use Typesetsh\PdfBundle\PdfGenerator;
+
 class PrintService
 {
-    /** @var PdfBundle\PdfGenerator */
+    /** @var PdfGenerator */
     private $pdfGenerator;
 
-    public function __construct(PdfBundle\PdfGenerator $pdfGenerator)
+    public function __construct(PdfGenerator $pdfGenerator)
     {
         $this->pdfGenerator = $pdfGenerator;
     }
@@ -76,7 +79,7 @@ class PrintService
         $result = $this->pdfGenerator->render($html);
         $result->toFile('./somefile.pdf');
         $result->asString();
-        
+
     }
 }
 ```
@@ -85,7 +88,7 @@ class PrintService
 ## Configuration
 
 ``` yaml
-# /config/typesetsh_pdf.yaml
+# /config/packages/typesetsh_pdf.yaml
 
 typesetsh_pdf:
   # List of allowed directories to load external resources (css, images, fonts,...)
