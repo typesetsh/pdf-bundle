@@ -2,11 +2,14 @@
   "name": "typesetsh/pdf-bundle",
   "description": "This bundle provides a wrapper for using the typeset.sh pdf engine.",
   "license": "MIT",
-  "version": "1.0.0",
   "authors": [
     {
       "name": "Jacob Siefer",
       "email": "mail@jsiefer.de"
+    },
+    {
+      "name": "Rouven Alexander Rieker",
+      "email": "therouv@googlemail.com"
     }
   ],
   "require": {
@@ -17,7 +20,7 @@
     "symfony/twig-pack": "^1.0",
     "symfony/yaml": "^4.3 || ^5.0",
     "symfony/config": "^4.3 || ^5.0",
-    "typesetsh/typesetsh": "^0.1"
+    "typesetsh/typesetsh": "^0.2.2"
   },
   "autoload": {
     "psr-4": {
