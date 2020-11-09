@@ -1,41 +1,36 @@
 {
-  "name": "typesetsh/pdf-bundle",
-  "description": "This bundle provides a wrapper for using the typeset.sh pdf engine.",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Jacob Siefer",
-      "email": "mail@jsiefer.de"
+    "name": "typesetsh/pdf-bundle",
+    "description": "This bundle provides a wrapper for using the typeset.sh pdf engine.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jacob Siefer",
+            "email": "mail@jsiefer.de"
+        },
+        {
+            "name": "Rouven Alexander Rieker",
+            "email": "therouv@googlemail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/framework-bundle": "^4.3 || ^5.0",
+        "symfony/dependency-injection": "^4.3 || ^5.0",
+        "symfony/http-client": "^4.3 || ^5.0",
+        "symfony/twig-pack": "^1.0",
+        "symfony/yaml": "^4.3 || ^5.0",
+        "symfony/config": "^4.3 || ^5.0",
+        "typesetsh/typesetsh": "^0.14"
     },
-    {
-      "name": "Rouven Alexander Rieker",
-      "email": "therouv@googlemail.com"
-    }
-  ],
-  "require": {
-    "php": "^7.2",
-    "symfony/framework-bundle": "^4.3 || ^5.0",
-    "symfony/dependency-injection": "^4.3 || ^5.0",
-    "symfony/http-client": "^4.3 || ^5.0",
-    "symfony/twig-pack": "^1.0",
-    "symfony/yaml": "^4.3 || ^5.0",
-    "symfony/config": "^4.3 || ^5.0",
-    "typesetsh/typesetsh": "^0.13"
-  },
-  "autoload": {
-    "psr-4": {
-      "Typesetsh\\PdfBundle\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Typesetsh\\PdfBundle\\": "tests/unit"
-    }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.typeset.sh"
-    }
-  ]
+    "autoload": {
+        "psr-4": {
+            "Typesetsh\\PdfBundle\\": "src"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.typeset.sh"
+        }
+    ]
 }
