@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Typesetsh\PdfBundle\Http;
 
-use jsiefer\IO;
+use Typesetsh\IO;
+use Typesetsh;
 use Symfony\Component\HttpFoundation;
-use typesetsh\Result;
 
 class Response extends HttpFoundation\Response
 {
     /**
-     * @var Result
+     * @var Typesetsh\Result
      */
     private $result;
 
-    public function __construct(Result $result, int $status = 200, array $headers = [])
+    public function __construct(Typesetsh\Result $result, int $status = 200, array $headers = [])
     {
         $headers += [
             'Content-Type' => 'application/pdf',
@@ -31,10 +31,7 @@ class Response extends HttpFoundation\Response
             return parent::sendContent();
         }
 
-        // @todo https://gitlab.com/jsiefer/issues.typeset.sh/issues/21
-        //$destination = new IO\Resource('php://output', 'wb');
         $destination = new IO\Memory();
-
         $this->result->save($destination);
 
         echo $destination->rewind()->read();
@@ -42,12 +39,12 @@ class Response extends HttpFoundation\Response
         return $this;
     }
 
-    public function getResult(): Result
+    public function getResult(): Typesetsh\Result
     {
         return $this->result;
     }
 
-    public function setResult(Result $result): void
+    public function setResult(Typesetsh\Result $result): void
     {
         $this->result = $result;
     }

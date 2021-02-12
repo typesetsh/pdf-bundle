@@ -4,95 +4,43 @@ declare(strict_types=1);
 
 namespace Typesetsh\PdfBundle;
 
-use typesetsh\HtmlToPdf;
-use typesetsh\Resource;
-use typesetsh\Result;
+use Typesetsh\HtmlToPdf;
+use Typesetsh\Resource;
+use Typesetsh\Result;
+use Typesetsh;
 
 class PdfGenerator
 {
     /** @var HtmlToPdf */
     private $htmlToPdf;
 
-    /** @var Resource\Cache */
-    private $resourceCache;
+    /** @var Typesetsh\UriResolver */
+    private $uriResolver;
 
-    /** @var string[] */
-    public $allowedDirectories = [];
-
-    /** @var bool */
-    public $allowHttp = false;
-
-    /** @var string */
-    public $baseUri = '';
-
-    /** @var int */
-    public $downloadLimit = 1024;
-
-    /** @var int */
-    public $timeout = 5;
-
-    public function __construct($cacheDir = '')
+    /**
+     * @param array<string,Typesetsh\UriResolver\Scheme> $schemes
+     */
+    public function __construct(array $schemes = [], string $baseUri)
     {
-        $this->htmlToPdf = new HtmlToPdf();
-        $this->resourceCache = new Resource\Cache($cacheDir);
+        $this->htmlToPdf = new Typesetsh\HtmlToPdf();
+        $this->uriResolver = new Typesetsh\UriResolver($schemes, $baseUri);
     }
 
+    /**
+     * Render single HTML file as PDF
+     */
     public function render(string $html): Result
     {
-        $result = $this->htmlToPdf->render($html, function ($path, $base = null) {
-            return $this->resolveUri($path, $base);
-        });
-
-        return $result;
+        return $this->htmlToPdf->render($html, $this->uriResolver);
     }
 
     /**
-     * Any attempt to include and load a external resources (css, img,...) goes through
-     * this function.
+     * Render multiple HTML files as a single PDF.
+     *
+     * @param non-emppty-list<string> $html
      */
-    private function resolveUri(string $uri, ?string $base): string
+    public function renderMultiple(array $html): Result
     {
-        $base = $base ?: $this->baseUri;
-        if ($uri && '/' === $uri[0] || '.' === $uri[0]) {
-            $uri = $base.'/'.$uri;
-        }
-
-        if (0 === strpos($uri, 'https://') || strpos($uri, 'http://')) {
-            return $this->resolveHttpUri($uri);
-        }
-
-        return $this->resolveLocalUri($uri);
-    }
-
-    /**
-     * Only allow access to the whitelisted directories.
-     */
-    private function resolveLocalUri(string $uri): string
-    {
-        $uri = realpath($uri);
-        if ($uri) {
-            foreach ($this->allowedDirectories as $directory) {
-                if (0 === strpos($uri, $directory)) {
-                    return $uri;
-                }
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * Only allow fetching http resources if enabled.
-     */
-    private function resolveHttpUri(string $uri): string
-    {
-        if (!$this->allowHttp) {
-            return '';
-        }
-
-        $this->resourceCache->downloadLimit = $this->downloadLimit;
-        $this->resourceCache->timeout = $this->timeout;
-
-        return $this->resourceCache->fetch($uri);
+        return $this->htmlToPdf->renderMultiple($html, $this->uriResolver);
     }
 }
