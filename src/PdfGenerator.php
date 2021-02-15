@@ -18,9 +18,9 @@ class PdfGenerator
     private $uriResolver;
 
     /**
-     * @param array<string,Typesetsh\UriResolver\Scheme> $schemes
+     * @param array<string, Typesetsh\UriResolver\Scheme> $schemes
      */
-    public function __construct(array $schemes = [], string $baseUri)
+    public function __construct(array $schemes = [], string $baseUri = null)
     {
         $this->htmlToPdf = new Typesetsh\HtmlToPdf();
         $this->uriResolver = new Typesetsh\UriResolver($schemes, $baseUri);
