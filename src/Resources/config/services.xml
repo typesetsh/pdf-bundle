@@ -14,12 +14,14 @@
     </parameters>
 
     <services>
-        <service id="typesetsh.pdf" class="Typesetsh\PdfBundle\PdfGenerator">
+        <service id="typesetsh.pdf" class="Typesetsh\PdfBundle\PdfGenerator" public="true">
             <argument/>
             <argument>%typesetsh_pdf.base_dir%</argument>
         </service>
+        <service id="Typesetsh\PdfBundle\PdfGenerator" alias="typesetsh.pdf" public="true" />
 
-        <service id="Typesetsh\PdfBundle\PdfGenerator" alias="typesetsh.pdf"/>
+        <service id="typesetsh.twig_pdf" class="Typesetsh\PdfBundle\Service\TwigPdf" autowire="true" public="true" />
+        <service id="Typesetsh\PdfBundle\Service\TwigPdf" alias="typesetsh.twig_pdf" public="true" />
 
         <service id="typesetsh.uri_resolver.file" class="Typesetsh\UriResolver\File">
             <argument>%typesetsh_pdf.allowed_directories%</argument>

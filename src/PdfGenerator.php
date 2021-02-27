@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Typesetsh\PdfBundle;
 
 use Typesetsh\HtmlToPdf;
-use Typesetsh\Resource;
 use Typesetsh\Result;
 use Typesetsh;
 
@@ -37,7 +36,7 @@ class PdfGenerator
     /**
      * Render multiple HTML files as a single PDF.
      *
-     * @param non-emppty-list<string> $html
+     * @param non-empty-list<string> $html
      */
     public function renderMultiple(array $html): Result
     {
