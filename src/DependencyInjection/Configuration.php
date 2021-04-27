@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('allowed_directories')->defaultValue(['%kernel.project_dir%/public'])->scalarPrototype()->end()->end()
                 ->scalarNode('base_dir')->defaultValue('%kernel.project_dir%/public')->end()
-                ->arrayNode('http')
+                ->arrayNode('http')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('cache_dir')->defaultValue('%kernel.cache_dir%/typesetsh')->end()
                         ->booleanNode('allow')->defaultValue(false)->end()

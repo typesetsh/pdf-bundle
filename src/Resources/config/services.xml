@@ -2,37 +2,21 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="typesetsh_pdf.allowed_directories" type="collection">
-            <parameter>%kernel.project_dir%/public</parameter>
-        </parameter>
-        <parameter key="typesetsh_pdf.base_dir">%kernel.project_dir%/public</parameter>
-        <parameter key="typesetsh_pdf.http.cache_dir">%kernel.cache_dir%/pools</parameter>
-        <parameter key="typesetsh_pdf.http.timeout">10</parameter>
-        <parameter key="typesetsh_pdf.http.download_limit">500</parameter>
-    </parameters>
-
     <services>
         <service id="typesetsh.pdf" class="Typesetsh\PdfBundle\PdfGenerator" public="true">
-            <argument/>
-            <argument>%typesetsh_pdf.base_dir%</argument>
+            <argument key="$baseUri">%typesetsh_pdf.base_dir%</argument>
         </service>
         <service id="Typesetsh\PdfBundle\PdfGenerator" alias="typesetsh.pdf" public="true" />
-
         <service id="typesetsh.twig_pdf" class="Typesetsh\PdfBundle\Service\TwigPdf" autowire="true" public="true" />
         <service id="Typesetsh\PdfBundle\Service\TwigPdf" alias="typesetsh.twig_pdf" public="true" />
-
         <service id="typesetsh.uri_resolver.file" class="Typesetsh\UriResolver\File">
             <argument>%typesetsh_pdf.allowed_directories%</argument>
             <tag name="typesetsh.uri_resolver.scheme" scheme="file" />
         </service>
-
         <service id="typesetsh.uri_resolver.data" class="Typesetsh\UriResolver\Data">
             <argument>%typesetsh_pdf.http.cache_dir%</argument>
             <tag name="typesetsh.uri_resolver.scheme" scheme="data" />
         </service>
-
         <service id="typesetsh.uri_resolver.http" class="Typesetsh\UriResolver\Http">
             <argument>%typesetsh_pdf.http.cache_dir%</argument>
             <argument>%typesetsh_pdf.http.timeout%</argument>
@@ -41,5 +25,4 @@
             <tag name="typesetsh.uri_resolver.scheme" scheme="https" />
         </service>
     </services>
-
 </container>
