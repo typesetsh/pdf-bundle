@@ -33,6 +33,9 @@ class TypesetshPdfExtension extends Extension
         if (!$container->hasParameter('typesetsh_pdf.base_dir')) {
             $container->setParameter('typesetsh_pdf.base_dir', (string)$config['base_dir']);
         }
+        if (!$container->hasParameter('typesetsh_pdf.pdf_version')) {
+            $container->setParameter('typesetsh_pdf.pdf_version', (string)$config['pdf_version']);
+        }
         if (!$container->hasParameter('typesetsh_pdf.allowed_directories')) {
             $container->setParameter('typesetsh_pdf.allowed_directories', (array)$config['allowed_directories']);
         }

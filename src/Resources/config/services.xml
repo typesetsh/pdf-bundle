@@ -5,6 +5,7 @@
     <services>
         <service id="typesetsh.pdf" class="Typesetsh\PdfBundle\PdfGenerator" public="true">
             <argument key="$baseUri">%typesetsh_pdf.base_dir%</argument>
+            <argument key="$version">%typesetsh_pdf.pdf_version%</argument>
         </service>
         <service id="Typesetsh\PdfBundle\PdfGenerator" alias="typesetsh.pdf" public="true" />
         <service id="typesetsh.twig_pdf" class="Typesetsh\PdfBundle\Service\TwigPdf" autowire="true" public="true" />

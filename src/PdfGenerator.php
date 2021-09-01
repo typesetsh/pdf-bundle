@@ -16,13 +16,17 @@ class PdfGenerator
     /** @var Typesetsh\UriResolver */
     private $uriResolver;
 
+    /** @var string */
+    private $version;
+
     /**
      * @param array<string, Typesetsh\UriResolver\Scheme> $schemes
      */
-    public function __construct(array $schemes = [], string $baseUri = null)
+    public function __construct(array $schemes = [], string $baseUri = null, string $version = '1.6')
     {
         $this->htmlToPdf = new Typesetsh\HtmlToPdf();
         $this->uriResolver = new Typesetsh\UriResolver($schemes, $baseUri);
+        $this->version = $version;
     }
 
     /**
@@ -30,7 +34,10 @@ class PdfGenerator
      */
     public function render(string $html): Result
     {
-        return $this->htmlToPdf->render($html, $this->uriResolver);
+        $result = $this->htmlToPdf->render($html, $this->uriResolver);
+        $result->version=$this->version;
+
+        return $result;
     }
 
     /**
@@ -40,6 +47,9 @@ class PdfGenerator
      */
     public function renderMultiple(array $html): Result
     {
-        return $this->htmlToPdf->renderMultiple($html, $this->uriResolver);
+        $result = $this->htmlToPdf->renderMultiple($html, $this->uriResolver);
+        $result->version=$this->version;
+
+        return $result;
     }
 }
