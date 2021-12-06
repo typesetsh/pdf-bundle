@@ -14,12 +14,12 @@
     ],
     "require": {
         "php": ">=7.2",
-        "symfony/framework-bundle": "^4.3 || ^5.0",
-        "symfony/dependency-injection": "^4.3 || ^5.0",
-        "symfony/http-client": "^4.3 || ^5.0",
+        "symfony/framework-bundle": "^4.3 || ^5.0 || ^6.0",
+        "symfony/dependency-injection": "^4.3 || ^5.0 || ^6.0",
+        "symfony/http-client": "^4.3 || ^5.0 || ^6.0",
         "symfony/twig-pack": "^1.0",
-        "symfony/yaml": "^4.3 || ^5.0",
-        "symfony/config": "^4.3 || ^5.0",
+        "symfony/yaml": "^4.3 || ^5.0 || ^6.0",
+        "symfony/config": "^4.3 || ^5.0 || ^6.0",
         "typesetsh/typesetsh": "^0.18"
     },
     "autoload": {
