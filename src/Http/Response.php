@@ -25,7 +25,7 @@ class Response extends HttpFoundation\Response
         $this->result = $result;
     }
 
-    public function sendContent()
+    public function sendContent(): static
     {
         if (!$this->isSuccessful()) {
             return parent::sendContent();
