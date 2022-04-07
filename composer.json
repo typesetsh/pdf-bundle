@@ -20,7 +20,7 @@
         "symfony/twig-pack": "^1.0",
         "symfony/yaml": "^4.3 || ^5.0 || ^6.0",
         "symfony/config": "^4.3 || ^5.0 || ^6.0",
-        "typesetsh/typesetsh": "^0.20"
+        "typesetsh/typesetsh": "^0.21"
     },
     "autoload": {
         "psr-4": {
