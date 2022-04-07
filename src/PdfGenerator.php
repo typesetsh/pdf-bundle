@@ -34,8 +34,14 @@ class PdfGenerator
      */
     public function render(string $html): Result
     {
+        $this->uriResolver->errors = [];
+
         $result = $this->htmlToPdf->render($html, $this->uriResolver);
-        $result->version=$this->version;
+        $result->version = $this->version;
+
+        if ($this->uriResolver->errors) {
+            array_push($result->issues, ...$this->uriResolver->errors);
+        }
 
         return $result;
     }
@@ -47,8 +53,14 @@ class PdfGenerator
      */
     public function renderMultiple(array $html): Result
     {
+        $this->uriResolver->errors = [];
+
         $result = $this->htmlToPdf->renderMultiple($html, $this->uriResolver);
-        $result->version=$this->version;
+        $result->version = $this->version;
+
+        if ($this->uriResolver->errors) {
+            array_push($result->issues, ...$this->uriResolver->errors);
+        }
 
         return $result;
     }
